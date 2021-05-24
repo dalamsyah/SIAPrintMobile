@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">SIA Print</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_barang">Barang</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">Login</string>
+    <string name="username_or_email">Username atau Email</string>
+    <string name="password">password</string>
+    <string name="lupa_password">Lupa password</string>
+    <string name="daftar">Tidak punya akun? Daftar</string>
+    <string name="copright">SIAPrint@2021</string>
+    <string name="register">Daftar</string>
+    <string name="email">Email</string>
+    <string name="username">Username</string>
+    <string name="ulangi_password">Ulangi Password</string>
+    <string name="desc_lupa_password">Tidak masalah! Masukkan email Anda di bawah ini dan kami akan mengirimkan instruksi untuk mengatur ulang kata sandi Anda.</string>
+    <string name="kirim_intruksi">Kirim Intruksi</string>
+    <string name="upload">Upload</string>
+    <string name="keranjang">Keranjang</string>
+    <string name="dec_upload">Pilih document max 5</string>
+    <string name="hitung">Hitung</string>
+    <string name="menu_logout">Logout</string>
+    <string name="btn_ok">OK</string>
+    <string name="btn_cancel">Batal</string>
+    <string name="err_not_found">error not found</string>
+    <string name="error_api">Kesalahan terjadi!</string>
+    <string name="error_api_parsing">Kesalahan parsing data!</string>
+</resources>

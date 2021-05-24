@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/splashScreenFragment">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.dalamsyah.siaprint.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_fragment_home_to_uploadFragment"
+            app:destination="@id/uploadFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_gallery"
+        android:name="com.dalamsyah.siaprint.ui.gallery.GalleryFragment"
+        android:label="@string/menu_gallery"
+        tools:layout="@layout/fragment_gallery" />
+    <fragment
+        android:id="@+id/nav_barang"
+        android:name="com.dalamsyah.siaprint.ui.barang.BarangFragment"
+        android:label="@string/menu_barang"
+        tools:layout="@layout/fragment_barang" >
+        <action
+            android:id="@+id/action_nav_barang_to_slideshowFragment"
+            app:destination="@id/slideshowFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/slideshowFragment"
+        android:name="com.dalamsyah.siaprint.ui.slideshow.SlideshowFragment"
+        android:label="fragment_slideshow"
+        tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.dalamsyah.siaprint.ui.login.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/nav_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.dalamsyah.siaprint.ui.register.RegisterFragment"
+        android:label="Daftar"
+        tools:layout="@layout/fragment_register" />
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.dalamsyah.siaprint.ui.forgotpassword.ForgotPasswordFragment"
+        android:label="Lupa Password"
+        tools:layout="@layout/fragment_forgot_password" />
+    <fragment
+        android:id="@+id/uploadFragment"
+        android:name="com.dalamsyah.siaprint.ui.upload.UploadFragment"
+        android:label="Upload"
+        tools:layout="@layout/fragment_upload" />
+    <fragment
+        android:id="@+id/indexFragment"
+        android:name="com.dalamsyah.siaprint.ui.index.IndexFragment"
+        android:label="fragment_index"
+        tools:layout="@layout/fragment_index" >
+        <action
+            android:id="@+id/action_indexFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_indexFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashScreenFragment"
+        android:name="com.dalamsyah.siaprint.ui.splashscreen.SplashScreenFragment"
+        android:label="fragment_spash_screen"
+        tools:layout="@layout/fragment_splash_screen" >
+        <action
+            android:id="@+id/action_splashScreenFragment_to_indexFragment"
+            app:destination="@id/indexFragment" />
+        <action
+            android:id="@+id/action_splashScreenFragment_to_homeFragment"
+            app:destination="@id/nav_home" />
+    </fragment>
+</navigation>

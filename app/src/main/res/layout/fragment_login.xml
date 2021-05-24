@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/margin_layout_atas_samping_bawah"
+    tools:context=".ui.login.LoginFragment">
+
+    <EditText
+        android:id="@+id/etUsername"
+        app:layout_constraintTop_toTopOf="parent"
+        android:hint="@string/username_or_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:inputType="textPassword"
+        app:layout_constraintTop_toBottomOf="@id/etUsername"
+        android:hint="@string/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btnLogin"
+        app:layout_constraintTop_toBottomOf="@id/etPassword"
+        android:text="@string/login"
+        android:theme="@style/ButtonPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvLupaPassword"
+        android:gravity="center"
+        android:padding="10dp"
+        app:layout_constraintTop_toBottomOf="@id/btnLogin"
+        android:text="@string/lupa_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

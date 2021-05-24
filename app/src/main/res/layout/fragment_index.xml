@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/padding_layout_atas_samping_bawah"
+    tools:context=".ui.index.IndexFragment">
+
+    <ImageView
+        android:id="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnLogin"
+        android:layout_marginBottom="200dp"
+        android:padding="20dp"
+        android:src="@drawable/logo_siaprint"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"/>
+
+    <Button
+        android:id="@+id/btnLogin"
+        app:layout_constraintBottom_toTopOf="@id/btnRegister"
+        android:text="@string/login"
+        android:theme="@style/ButtonPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btnRegister"
+        app:layout_constraintBottom_toTopOf="@id/tvCr"
+        android:layout_marginBottom="30dp"
+        android:text="@string/register"
+        android:theme="@style/ButtonSecondary"
+        android:textColor="@color/text_grey"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvCr"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/copright"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
