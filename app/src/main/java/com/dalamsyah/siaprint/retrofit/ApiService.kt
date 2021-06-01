@@ -22,4 +22,14 @@ interface ApiService {
     @FormUrlEncoded
     suspend fun status(@Field("apitoken") apitoken: String,
                       @Field("userid") userid: String): ResponseAPI
+
+    @POST("apipayment")
+    @FormUrlEncoded
+    suspend fun payment(@Field("apitoken") apitoken: String,
+                        @Field("payment_no") payment_no: String,
+                        @Field("total_amount") total_amount: String,
+                        @Field("payment_type") payment_type: String,
+                        @Field("payment_name") payment_name: String,
+                        @Field("phone_no") phone_no: String,
+                        @Field("vendor_code") vendor_code: String): ResponseAPI
 }

@@ -7,11 +7,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.status.StatusDetailFragment">
 
+    <TextView
+        android:id="@+id/tvLabelPembayaran"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/margin_layout_atas_samping_bawah"
+        android:layout_marginLeft="@dimen/margin_layout_atas_samping_bawah"
+        android:layout_marginRight="@dimen/margin_layout_atas_samping_bawah"
+        android:text="@string/pembayaran"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/etNoOVO"
+        app:layout_constraintTop_toBottomOf="@id/tvLabelPembayaran"
+        android:hint="@string/masukannoovo"
+        android:inputType="number"
+        android:layout_marginLeft="@dimen/margin_layout_atas_samping_bawah"
+        android:layout_marginRight="@dimen/margin_layout_atas_samping_bawah"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvDetail"
+        app:layout_constraintTop_toBottomOf="@id/etNoOVO"
+        android:layout_marginLeft="@dimen/margin_layout_atas_samping_bawah"
+        android:layout_marginRight="@dimen/margin_layout_atas_samping_bawah"
+        android:layout_marginTop="10dp"
+        android:text="@string/detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/layout_item_status"
-        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/layout_item_status_detail"
+        app:layout_constraintTop_toBottomOf="@id/tvDetail"
         app:layout_constraintBottom_toTopOf="@id/btnBayar"
         android:layout_width="match_parent"
         android:layout_height="0dp"/>

@@ -122,4 +122,8 @@ class RegisterFragment : BaseFragment(), MainActivity.DialogListener {
         }
     }
 
+    override fun onCancel() {
+
+    }
+
 }

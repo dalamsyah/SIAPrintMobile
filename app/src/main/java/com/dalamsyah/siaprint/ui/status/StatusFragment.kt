@@ -76,8 +76,6 @@ class StatusFragment : BaseFragment() {
                     Status.SUCCESS -> {
                         mainViewModel.showProgress(false)
 
-                        val a = 1000
-
                         it.data?.let { api ->
 
 //                            val json = Gson().toJson(api, ResponseAPI::class.java)

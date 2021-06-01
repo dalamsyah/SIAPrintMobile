@@ -30,7 +30,6 @@ import com.dalamsyah.siaprint.ui.login.LoginFragment
 import com.google.android.material.navigation.NavigationView
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
-import com.xendit.Xendit
 import kotlinx.android.synthetic.main.app_bar_main.view.*
 
 class MainActivity : AppCompatActivity(),
@@ -39,6 +38,7 @@ class MainActivity : AppCompatActivity(),
 
     interface DialogListener {
         fun onOK()
+        fun onCancel()
     }
 
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -51,8 +51,6 @@ class MainActivity : AppCompatActivity(),
     private lateinit var tvEmail: TextView
     private lateinit var tvName: TextView
 
-    private lateinit var xendit: Xendit
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -60,9 +58,6 @@ class MainActivity : AppCompatActivity(),
         setContentView(binding.root)
 
         setSupportActionBar(binding.appBarMain.toolbar)
-
-        xendit = Xendit(this, "xnd_production_VrrRAisAknWuLWiuj69PMd4xZ4HUBS67nrq3ieZ9E3LNiEz0FUyWzukeM6ufYj")
-
         /*
         * init log
         * */
@@ -138,6 +133,7 @@ class MainActivity : AppCompatActivity(),
         })
 
         btnOK.setOnClickListener(this)
+        btnCancel.setOnClickListener(this)
 
 //        btnOK.setOnClickListener {
 //            viewModel.hideDialog()
@@ -209,6 +205,12 @@ class MainActivity : AppCompatActivity(),
                 viewModel.hideDialog()
                 if (mListener != null){
                     mListener!!.onOK()
+                }
+            }
+            R.id.btnCancel -> {
+                viewModel.hideDialog()
+                if (mListener != null){
+                    mListener!!.onCancel()
                 }
             }
         }
