@@ -22,7 +22,7 @@ open class BaseFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        pref = Prefs(context!!)
+        pref = Prefs(requireContext())
 
         viewModelAPI = activity?.let { ViewModelProviders.of(it, APIFactoryViewModel(
             ApiHelper( RetrofitBuilder.apiService, user = null )

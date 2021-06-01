@@ -13,10 +13,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.dalamsyah.siaprint.BuildConfig
+import com.dalamsyah.siaprint.MainActivity
 import com.dalamsyah.siaprint.R
 import com.dalamsyah.siaprint.databinding.FragmentLoginBinding
 import com.dalamsyah.siaprint.models.ResponseAPI
 import com.dalamsyah.siaprint.models.ResultErrorLogin
+import com.dalamsyah.siaprint.models.Results
 import com.dalamsyah.siaprint.models.Users
 import com.dalamsyah.siaprint.retrofit.APIViewModel
 import com.dalamsyah.siaprint.retrofit.Resource
@@ -25,15 +27,21 @@ import com.dalamsyah.siaprint.ui.utils.BaseFragment
 import com.dalamsyah.siaprint.utils.StringUtil
 import com.dalamsyah.siaprint.utils.toObject
 import com.google.gson.Gson
+import com.orhanobut.logger.Logger
 import org.json.JSONObject
 import java.util.*
 import kotlin.String as String
 
 class LoginFragment : BaseFragment() {
 
+    interface LoginInterface{
+        fun logged()
+    }
+
     private lateinit var loginViewModel: LoginViewModel
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
+    private lateinit var loginInterface: LoginInterface
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +65,7 @@ class LoginFragment : BaseFragment() {
 
         loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        loginInterface = (activity as MainActivity) as LoginInterface
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             requireActivity().window.statusBarColor = ContextCompat.getColor(requireActivity(), R.color.blue_700_siaprint)
@@ -91,13 +100,13 @@ class LoginFragment : BaseFragment() {
                         it.data?.let { api ->
 
                             val json = Gson().toJson(api, ResponseAPI::class.java)
-                            val data = Gson().fromJson(json, ResponseAPI::class.java)
+                            Logger.d(json)
 
                             if (api.result == null) {
 
                                 if (api.message is String) {
                                     mainViewModel.showDialog( api.message as String, false )
-                                } else if (api.message is Map<*, *>){
+                                } else if (api.message is Map<*,*>){
                                     val msg = api.message as Map<String, String>
 
                                     var message = ""
@@ -111,26 +120,21 @@ class LoginFragment : BaseFragment() {
 
                             } else {
 
-                                if (api.result is Map<*, *>) {
+                                Logger.d( api.result!!.user )
 
-                                    val userMap = api.result as Map<String, Users>
+                                if (api.result?.user is Users) {
 
-                                    val userConvert = JSONObject(userMap).get("user").toString()
-                                    val user = Gson().fromJson(userConvert, Users::class.java)
+                                    pref.user = api.result?.user
+                                    pref.apiToken = "siaprint98765"
 
-                                    if (user is Users) {
-                                        pref.user = user
+                                    loginInterface.logged()
 
-                                        findNavController().navigate(
-                                            R.id.action_loginFragment_to_homeFragment,
-                                            null,
-                                            NavOptions.Builder()
-                                                .setPopUpTo(R.id.indexFragment,
-                                                    true).build())
-
-                                    } else {
-                                        mainViewModel.showDialog(resources.getString(R.string.error_api_parsing), false )
-                                    }
+                                    findNavController().navigate(
+                                        R.id.action_loginFragment_to_homeFragment,
+                                        null,
+                                        NavOptions.Builder()
+                                            .setPopUpTo(R.id.indexFragment,
+                                                true).build())
 
                                 } else {
                                     mainViewModel.showDialog(resources.getString(R.string.error_api_parsing), false )

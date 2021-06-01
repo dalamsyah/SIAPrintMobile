@@ -2,38 +2,40 @@ package com.dalamsyah.siaprint
 
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.viewModels
-import com.google.android.material.navigation.NavigationView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.text.HtmlCompat
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.text.HtmlCompat
-import androidx.core.view.GravityCompat
-import androidx.navigation.NavController
-import androidx.navigation.NavOptions
-import androidx.navigation.fragment.findNavController
-import com.dalamsyah.siaprint.`interface`.DrawerLockInterface
-import com.dalamsyah.siaprint.`interface`.ProgressInterface
 import com.dalamsyah.siaprint.databinding.ActivityMainBinding
+import com.dalamsyah.siaprint.interfaceui.DrawerLockInterface
+import com.dalamsyah.siaprint.interfaceui.ProgressInterface
+import com.dalamsyah.siaprint.interfaceui.ToolbarListener
 import com.dalamsyah.siaprint.models.Users
 import com.dalamsyah.siaprint.storage.Prefs
+import com.dalamsyah.siaprint.ui.login.LoginFragment
+import com.google.android.material.navigation.NavigationView
+import com.orhanobut.logger.AndroidLogAdapter
+import com.orhanobut.logger.Logger
+import com.xendit.Xendit
+import kotlinx.android.synthetic.main.app_bar_main.view.*
 
 class MainActivity : AppCompatActivity(),
-    DrawerLockInterface,
-    ProgressInterface,
-    View.OnClickListener,
-    NavigationView.OnNavigationItemSelectedListener {
+    DrawerLockInterface, ProgressInterface, LoginFragment.LoginInterface, ToolbarListener,
+    View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     interface DialogListener {
         fun onOK()
@@ -46,6 +48,11 @@ class MainActivity : AppCompatActivity(),
     private val viewModel: MainViewModel by viewModels()
     private var mListener: DialogListener? = null
 
+    private lateinit var tvEmail: TextView
+    private lateinit var tvName: TextView
+
+    private lateinit var xendit: Xendit
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -53,6 +60,17 @@ class MainActivity : AppCompatActivity(),
         setContentView(binding.root)
 
         setSupportActionBar(binding.appBarMain.toolbar)
+
+        xendit = Xendit(this, "xnd_production_VrrRAisAknWuLWiuj69PMd4xZ4HUBS67nrq3ieZ9E3LNiEz0FUyWzukeM6ufYj")
+
+        /*
+        * init log
+        * */
+        Logger.addLogAdapter(object : AndroidLogAdapter(){
+            override fun isLoggable(priority: Int, tag: String?): Boolean {
+                return BuildConfig.DEBUG
+            }
+        })
 
 //        binding.appBarMain.fab.setOnClickListener { view ->
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -63,7 +81,8 @@ class MainActivity : AppCompatActivity(),
         navController = findNavController(R.id.nav_host_fragment_content_main)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        appBarConfiguration = AppBarConfiguration(setOf( R.id.nav_home, R.id.uploadFragment, R.id.nav_logout, R.id.nav_barang), drawerLayout)
+        appBarConfiguration = AppBarConfiguration(setOf( R.id.nav_home, R.id.uploadFragment, R.id.nav_logout, R.id.statusFragment), drawerLayout)
+
 
 //        val topLevelDestinations = setOf(R.id.nav_home)
 //        appBarConfiguration = AppBarConfiguration.Builder(topLevelDestinations)
@@ -72,8 +91,6 @@ class MainActivity : AppCompatActivity(),
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         navView.setNavigationItemSelectedListener(this)
-
-        binding
 
 //        val contentMain = ContentMainBinding.inflate(layoutInflater)
         val progressBarLayout = findViewById<ConstraintLayout>(R.id.progressBarLayout)
@@ -84,15 +101,8 @@ class MainActivity : AppCompatActivity(),
 
         val nav = navView.getHeaderView(0)
 
-        val tvEmail = nav.findViewById<TextView>(R.id.tvEmail)
-        val tvName = nav.findViewById<TextView>(R.id.tvName)
-
-        val user = Prefs(this).user
-        Log.d("DEBUGGG", user.toString())
-        user?.apply {
-            tvName.text = username.toString()
-            tvEmail.text = email.toString()
-        }
+        tvEmail = nav.findViewById<TextView>(R.id.tvEmail)
+        tvName = nav.findViewById<TextView>(R.id.tvName)
 
         viewModel.progressBarLayout.observe(this, {
             if(it) {
@@ -154,6 +164,7 @@ class MainActivity : AppCompatActivity(),
                 navController.navigate(R.id.nav_home)
             }
             R.id.uploadFragment -> navController.navigate(R.id.uploadFragment)
+            R.id.statusFragment -> navController.navigate(R.id.statusFragment)
             R.id.nav_logout -> {
                 doLogout()
             }
@@ -205,6 +216,18 @@ class MainActivity : AppCompatActivity(),
 
     fun setupClickDialog(listener: DialogListener?){
         this.mListener = listener
+    }
+
+    override fun logged() {
+        val user = Prefs(this).user
+        user?.apply {
+            tvName.text = username.toString()
+            tvEmail.text = email.toString()
+        }
+    }
+
+    override fun updateTitleToolabar(title: String) {
+        binding.drawerLayout.toolbar.title = title
     }
 
 }

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <import type="com.dalamsyah.siaprint.utils.StringUtilKt"/>
+        <variable
+            name="model"
+            type="com.dalamsyah.siaprint.models.TransactionPrintD" />
+        <variable
+            name="clickListener"
+            type="com.dalamsyah.siaprint.ui.status.StatusDetailListener" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_margin="10dp"
+        android:onClick="@{()->clickListener.onClick(model)}">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textStyle="bold"
+                android:text="@{String.valueOf(model.filename)}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tvSubtitle"
+                app:layout_constraintTop_toBottomOf="@id/tvTitle"
+                android:text="@{String.valueOf(model.ink_name) + ` | ` + String.valueOf(model.size_name) +` | `+ String.valueOf(model.type_paper_name) +` | `+ String.valueOf(model.finish_text) +` | copy: `+ String.valueOf(model.copy) +` | total hal: `+ String.valueOf(model.total_pages)+` | `+ String.valueOf(model.pages_remarks)+` | `+ String.valueOf(model.ntgew_d) + String.valueOf(model.ntgew_uom_d)+` | `+ StringUtilKt.convertRupiah(Integer.valueOf(model.amount_d))}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tvDesc"
+                app:layout_constraintTop_toBottomOf="@id/tvSubtitle"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:text="@{`Catatan: `+String.valueOf(model.remarks_d)}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>
+

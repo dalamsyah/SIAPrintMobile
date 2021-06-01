@@ -4,14 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import com.dalamsyah.siaprint.R
-import com.dalamsyah.siaprint.`interface`.DrawerLockInterface
+import com.dalamsyah.siaprint.interfaceui.DrawerLockInterface
 import com.dalamsyah.siaprint.databinding.FragmentHomeBinding
 import com.dalamsyah.siaprint.ui.utils.BaseFragment
 

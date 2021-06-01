@@ -2,7 +2,6 @@ package com.dalamsyah.siaprint.ui.index
 
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,12 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.dalamsyah.siaprint.MainActivity
 import com.dalamsyah.siaprint.R
-import com.dalamsyah.siaprint.`interface`.DrawerLockInterface
+import com.dalamsyah.siaprint.interfaceui.DrawerLockInterface
 import com.dalamsyah.siaprint.databinding.FragmentIndexBinding
-import com.dalamsyah.siaprint.databinding.FragmentLoginBinding
-import com.dalamsyah.siaprint.ui.login.LoginViewModel
 import com.dalamsyah.siaprint.ui.utils.BaseFragment
 
 class IndexFragment : BaseFragment() {

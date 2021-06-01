@@ -35,4 +35,7 @@
     <string name="err_not_found">error not found</string>
     <string name="error_api">Kesalahan terjadi!</string>
     <string name="error_api_parsing">Kesalahan parsing data!</string>
+    <string name="menu_status">Status</string>
+    <string name="batal">batal</string>
+    <string name="bayar">bayar</string>
 </resources>

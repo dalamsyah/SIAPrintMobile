@@ -1,7 +1,11 @@
 package com.dalamsyah.siaprint.utils
 
+import android.util.Log
+import com.dalamsyah.siaprint.BuildConfig
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import java.text.NumberFormat
+import java.util.*
 import kotlin.reflect.KClass
 
 object StringUtil {
@@ -18,6 +22,17 @@ object StringUtil {
         }
         return retStr
     }
+
+}
+
+private val isDebug = BuildConfig.DEBUG
+private const val TAG = "DEBUGGG"
+
+fun printLog(msg: String){
+    if (isDebug) Log.d(TAG, msg)
+}
+
+object PrintLog{
 
 }
 
@@ -51,4 +66,16 @@ fun <T : Any> mapToObject(map: Map<String, Any>, clazz: KClass<T>) : T? {
 
     //return object from constructor call
     return null //constructor.callBy(args)
+}
+
+fun Any.convertRupiah(): String {
+    val localId = Locale("in", "ID")
+    val formatter = NumberFormat.getCurrencyInstance(localId)
+    return formatter.format(this)
+}
+
+fun convertRupiah(number: Double): String {
+    val localId = Locale("in", "ID")
+    val formatter = NumberFormat.getCurrencyInstance(localId)
+    return formatter.format(number).toString().replace("Rp", "Rp ").replace(",00","")
 }

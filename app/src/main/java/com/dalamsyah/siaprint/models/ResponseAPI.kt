@@ -14,5 +14,5 @@ class ResponseAPI(
     var code: Int? = null,
 
     @SerializedName("result")
-    var result: Any? = null
+    var result: Results? = null
 )

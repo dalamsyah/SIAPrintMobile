@@ -24,4 +24,13 @@ class APIViewModel(private val mainRepository: MainRepository) : ViewModel() {
         }
     }
 
+    fun status(apitoken: String, userid: String) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = mainRepository.status(apitoken, userid)))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+        }
+    }
+
 }

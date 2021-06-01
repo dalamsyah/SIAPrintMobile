@@ -19,7 +19,6 @@ class UploadAdapter (private val listener: UploadListener) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        Log.d("DEBUGGG", "OKE-> $item")
         holder.bind(item, listener)
     }
 

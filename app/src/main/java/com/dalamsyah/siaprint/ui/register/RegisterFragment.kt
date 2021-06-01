@@ -88,7 +88,7 @@ class RegisterFragment : BaseFragment(), MainActivity.DialogListener {
                                         )
                                     }
 
-                                } else if (api.message is Map<*, *>){
+                                } else if (api.message is String){
                                     val msg = api.message as Map<String, String>
 
                                     var message = ""

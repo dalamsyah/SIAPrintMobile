@@ -61,6 +61,20 @@
         android:label="Upload"
         tools:layout="@layout/fragment_upload" />
     <fragment
+        android:id="@+id/statusFragment"
+        android:name="com.dalamsyah.siaprint.ui.status.StatusFragment"
+        android:label="Status"
+        tools:layout="@layout/fragment_status">
+        <action
+            android:id="@+id/action_statusFragment_to_statusDetailFragment"
+            app:destination="@id/statusDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/statusDetailFragment"
+        android:name="com.dalamsyah.siaprint.ui.status.StatusDetailFragment"
+        android:label="Detail"
+        tools:layout="@layout/fragment_status_detail" />
+    <fragment
         android:id="@+id/indexFragment"
         android:name="com.dalamsyah.siaprint.ui.index.IndexFragment"
         android:label="fragment_index"

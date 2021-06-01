@@ -18,4 +18,8 @@ interface ApiService {
                       @Field("username") username: String,
     ): ResponseAPI
 
+    @POST("apistatus")
+    @FormUrlEncoded
+    suspend fun status(@Field("apitoken") apitoken: String,
+                      @Field("userid") userid: String): ResponseAPI
 }

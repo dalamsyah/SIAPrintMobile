@@ -52,7 +52,6 @@ class UploadFragment : BaseFragment() {
         viewModel.listUpload.value = mutableListOf()
         viewModel.listUpload.observe(viewLifecycleOwner, {
             adapter.submitList(it.toMutableList())
-            Log.d("DEBUGGG", "refrehsss....")
         })
 
         // Inflate the layout for this fragment

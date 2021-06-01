@@ -12,18 +12,19 @@ class Prefs(context: Context) {
     companion object {
         private const val PREFS_FILENAME = "com.dalamsyah.siaprint.pref"
 
-        private const val KEY_MY_STRING = "my_string"
         private const val KEY_MY_BOOLEAN = "my_boolean"
         private const val KEY_MY_ARRAY = "string_array"
-        private const val KEY_MY_OBJECT = "my_object"
+
+        private const val USER = "$PREFS_FILENAME.user"
+        private const val API_TOKEN = "$PREFS_FILENAME.apitoken"
     }
     private val gson = Gson()
     private val sharedPrefs: SharedPreferences =
         context.getSharedPreferences(PREFS_FILENAME, Context.MODE_PRIVATE)
 
-    var myString: String
-        get() = sharedPrefs.getString(KEY_MY_STRING, "") ?: ""
-        set(value) = sharedPrefs.edit { putString(KEY_MY_STRING, value) }
+    var apiToken: String
+        get() = sharedPrefs.getString(API_TOKEN, "") ?: ""
+        set(value) = sharedPrefs.edit { putString(API_TOKEN, value) }
 
     var myBoolean: Boolean
         get() = sharedPrefs.getBoolean(KEY_MY_BOOLEAN, false)
@@ -35,9 +36,9 @@ class Prefs(context: Context) {
 
     var user: Users?
         get() {
-            val jsonString = sharedPrefs.getString(KEY_MY_OBJECT, null) ?: return null
+            val jsonString = sharedPrefs.getString(USER, null) ?: return null
             return gson.fromJson(jsonString, object : TypeToken<Users>() {}.type)
         }
-        set(value) = sharedPrefs.edit { putString(KEY_MY_OBJECT, gson.toJson(value)) }
+        set(value) = sharedPrefs.edit { putString(USER, gson.toJson(value)) }
 
 }
