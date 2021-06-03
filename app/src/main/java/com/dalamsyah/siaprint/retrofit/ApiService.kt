@@ -1,6 +1,8 @@
 package com.dalamsyah.siaprint.retrofit
 
 import com.dalamsyah.siaprint.models.ResponseAPI
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.http.*
 
 interface ApiService {
@@ -32,4 +34,31 @@ interface ApiService {
                         @Field("payment_name") payment_name: String,
                         @Field("phone_no") phone_no: String,
                         @Field("vendor_code") vendor_code: String): ResponseAPI
+
+    @Multipart
+    @POST("apiuploadsave")
+    suspend fun upload(
+
+        @Part inputFile1: MultipartBody.Part,
+
+        @Part inputFile2: MultipartBody.Part,
+
+        @Part inputFile3: MultipartBody.Part,
+
+        @Part inputFile4: MultipartBody.Part,
+
+        @Part inputFile5: MultipartBody.Part
+    )
+
+    @Multipart
+    @POST("apiuploadsave")
+    suspend fun uploadSingle(
+
+        @Part("apitoken") apitoken: String,
+        @Part("userid") userid: String,
+
+        @Part inputFile1: MultipartBody.Part,
+        @Part("desc") desc: RequestBody
+    ): ResponseAPI
+
 }

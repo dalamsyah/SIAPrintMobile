@@ -41,4 +41,5 @@
     <string name="pembayaran">Pembayaran</string>
     <string name="masukannoovo">Masukan No OVO</string>
     <string name="detail">Detail</string>
+    <string name="no_ovo_masih_kosong">No OVO tidak boleh kosong!</string>
 </resources>

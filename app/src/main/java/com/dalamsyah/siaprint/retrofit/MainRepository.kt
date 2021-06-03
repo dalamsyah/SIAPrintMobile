@@ -1,5 +1,8 @@
 package com.dalamsyah.siaprint.retrofit
 
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+
 class MainRepository(private val apiHelper: ApiHelper) {
 
     suspend fun login(username: String, password: String) = apiHelper.login(username, password)
@@ -7,5 +10,11 @@ class MainRepository(private val apiHelper: ApiHelper) {
     suspend fun status(apitoken: String, userid: String) = apiHelper.status(apitoken, userid)
     suspend fun payment(apitoken: String, payment_no: String, total_amount: String, payment_type: String, payment_name: String, phone_no: String, vendor_code: String) =
         apiHelper.payment(apitoken, payment_no, total_amount, payment_type, payment_name, phone_no, vendor_code)
+    suspend fun upload(apitoken: String, userid: String,
+                       inputFile1: MultipartBody.Part, inputFile2: MultipartBody.Part, inputFile3: MultipartBody.Part,
+                       inputFile4: MultipartBody.Part, inputFile5: MultipartBody.Part,
+                       desc: RequestBody
+    ) =
+        apiHelper.upload(apitoken, userid, inputFile1, inputFile2, inputFile3, inputFile4, inputFile5, desc)
 
 }

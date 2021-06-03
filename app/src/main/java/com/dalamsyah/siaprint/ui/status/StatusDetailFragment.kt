@@ -28,9 +28,12 @@ class StatusDetailFragment : BaseFragment(), MainActivity.DialogListener {
     private val binding get() = _binding!!
     private lateinit var adapter: StatusDetailAdapter
 
+    private var transH: TransactionPrintH = TransactionPrintH()
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        (activity as MainActivity).setupClickDialog(null)
     }
 
     override fun onCreateView(
@@ -44,7 +47,7 @@ class StatusDetailFragment : BaseFragment(), MainActivity.DialogListener {
         })
         binding.recyclerView.adapter = adapter
 
-        var transH = arguments?.getSerializable("trans_h") as TransactionPrintH
+        transH = arguments?.getSerializable("trans_h") as TransactionPrintH
         (activity as MainActivity).updateTitleToolabar("Detail #${transH.print_h_code}")
 
         viewModel.listTransD.observe(viewLifecycleOwner, {
@@ -59,18 +62,27 @@ class StatusDetailFragment : BaseFragment(), MainActivity.DialogListener {
         if (transH.trsc_h_status.equals(Siaprint.WAITING_PAYMENT)){
             binding.btnBayar.visibility = View.VISIBLE
             binding.btnCancel.visibility = View.VISIBLE
+            binding.tvLabelPembayaran.visibility = View.VISIBLE
+            binding.etNoOVO.visibility = View.VISIBLE
         } else {
             binding.btnBayar.visibility = View.GONE
             binding.btnCancel.visibility = View.GONE
+            binding.tvLabelPembayaran.visibility = View.GONE
+            binding.etNoOVO.visibility = View.GONE
         }
 
-        (activity as MainActivity).setupClickDialog(this)
-
         binding.btnBayar.setOnClickListener {
-            mainViewModel.showDialog("Anda yakin melakukan pembayaran?",
-                konf = true,
-                isAction = true
-            )
+
+            if (binding.etNoOVO.text.toString().trim() == ""){
+                mainViewModel.showDialog(resources.getString(R.string.no_ovo_masih_kosong), false )
+            } else {
+                (activity as MainActivity).setupClickDialog(this)
+
+                mainViewModel.showDialog("Anda yakin melakukan pembayaran?",
+                    konf = true,
+                    isAction = true
+                )
+            }
         }
 
         // Inflate the layout for this fragment
@@ -78,10 +90,9 @@ class StatusDetailFragment : BaseFragment(), MainActivity.DialogListener {
     }
 
     override fun onOK() {
-        Toast.makeText(context, "Oke clicked", Toast.LENGTH_SHORT).show()
 
-        viewModelAPI.payment(apitoken = pref.apiToken, payment_no = "91234", total_amount = "1", payment_type = "PYM001",
-        payment_name = "OVO", phone_no = "08979598671", vendor_code = "VDR001").observe(viewLifecycleOwner, {
+        viewModelAPI.payment(apitoken = pref.apiToken, payment_no = transH.print_h_code.toString(), total_amount = transH.amount_h.toString(), payment_type = Siaprint.PAYMENT_TYPE_CODE_OVO,
+        payment_name = Siaprint.PAYMENT_TYPE_OVO, phone_no = binding.etNoOVO.text.toString(), vendor_code = Siaprint.VENDOR1).observe(viewLifecycleOwner, {
             it.let {
                 when(it.status){
                     Status.LOADING -> {
@@ -94,14 +105,22 @@ class StatusDetailFragment : BaseFragment(), MainActivity.DialogListener {
 
                             Logger.d( api.result )
 
-                            if (api.result != null) {
+                            if (api.result!!.payment != null) {
+
+                                findNavController().popBackStack()
+                                mainViewModel.showDialog(resources.getString(R.string.no_ovo_masih_kosong), false )
 
                             } else {
+
+                                mainViewModel.showDialog(resources.getString(R.string.error_api), false )
 
                             }
                         }
                     }
                     Status.ERROR -> {
+
+                        (activity as MainActivity).setupClickDialog(null)
+
                         if (BuildConfig.DEBUG){
                             mainViewModel.showDialog("${it.message}", false )
                         } else {
@@ -116,7 +135,7 @@ class StatusDetailFragment : BaseFragment(), MainActivity.DialogListener {
     }
 
     override fun onCancel() {
-
+        (activity as MainActivity).setupClickDialog(null)
     }
 
 }

@@ -1,7 +1,9 @@
 package com.dalamsyah.siaprint.retrofit
 
+import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
 
 object RetrofitBuilder {
 
@@ -11,17 +13,21 @@ object RetrofitBuilder {
 //    const val BASE_URL = "http://skripsiangga.xyz/fitgo/public/"
 //    const val BASE_URL = "https://apifitgo.dalamsyah.com/"
 
+    var gson = GsonBuilder()
+        .setLenient()
+        .create()
+
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build() //Doesn't require the adapter
     }
 
     private fun getRetrofit(url: String): Retrofit {
         return Retrofit.Builder()
             .baseUrl(url)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build() //Doesn't require the adapter
     }
 

@@ -3,6 +3,8 @@ package com.dalamsyah.siaprint.retrofit
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import kotlinx.coroutines.Dispatchers
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 class APIViewModel(private val mainRepository: MainRepository) : ViewModel() {
 
@@ -37,6 +39,18 @@ class APIViewModel(private val mainRepository: MainRepository) : ViewModel() {
         emit(Resource.loading(data = null))
         try {
             emit(Resource.success(data = mainRepository.payment(apitoken, payment_no, total_amount, payment_type, payment_name, phone_no, vendor_code)))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+        }
+    }
+
+    fun upload(apitoken: String, userid: String,
+               inputFile1: MultipartBody.Part, inputFile2: MultipartBody.Part, inputFile3: MultipartBody.Part,
+               inputFile4: MultipartBody.Part, inputFile5: MultipartBody.Part, desc: RequestBody
+    ) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = mainRepository.upload(apitoken, userid, inputFile1, inputFile2, inputFile3, inputFile4, inputFile5, desc)))
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
         }
