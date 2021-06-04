@@ -42,4 +42,6 @@
     <string name="masukannoovo">Masukan No OVO</string>
     <string name="detail">Detail</string>
     <string name="no_ovo_masih_kosong">No OVO tidak boleh kosong!</string>
+    <string name="next">Selanjutnya</string>
+    <string name="alamatyangdipilih">Alamat yang dipilih</string>
 </resources>

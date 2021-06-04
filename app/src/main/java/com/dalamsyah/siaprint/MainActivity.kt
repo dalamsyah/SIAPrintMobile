@@ -76,7 +76,9 @@ class MainActivity : AppCompatActivity(),
         navController = findNavController(R.id.nav_host_fragment_content_main)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        appBarConfiguration = AppBarConfiguration(setOf( R.id.nav_home, R.id.uploadFragment, R.id.nav_logout, R.id.statusFragment), drawerLayout)
+        appBarConfiguration = AppBarConfiguration(
+            setOf( R.id.nav_home, R.id.uploadFragment, R.id.nav_logout, R.id.statusFragment, R.id.keranjangFragment
+            ), drawerLayout)
 
 
 //        val topLevelDestinations = setOf(R.id.nav_home)
@@ -163,6 +165,7 @@ class MainActivity : AppCompatActivity(),
             }
             R.id.uploadFragment -> navController.navigate(R.id.uploadFragment)
             R.id.statusFragment -> navController.navigate(R.id.statusFragment)
+            R.id.keranjangFragment -> navController.navigate(R.id.keranjangFragment)
             R.id.nav_logout -> {
                 doLogout()
             }

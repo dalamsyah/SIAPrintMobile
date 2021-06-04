@@ -35,6 +35,15 @@ class APIViewModel(private val mainRepository: MainRepository) : ViewModel() {
         }
     }
 
+    fun keranjang(apitoken: String, userid: String) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = mainRepository.keranjang(apitoken, userid)))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+        }
+    }
+
     fun payment(apitoken: String, payment_no: String, total_amount: String, payment_type: String, payment_name: String, phone_no: String, vendor_code: String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {

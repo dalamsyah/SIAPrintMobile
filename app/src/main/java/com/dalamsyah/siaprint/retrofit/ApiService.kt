@@ -25,6 +25,11 @@ interface ApiService {
     suspend fun status(@Field("apitoken") apitoken: String,
                       @Field("userid") userid: String): ResponseAPI
 
+    @POST("apibasket")
+    @FormUrlEncoded
+    suspend fun keranjang(@Field("apitoken") apitoken: String,
+                       @Field("userid") userid: String): ResponseAPI
+
     @POST("apipayment")
     @FormUrlEncoded
     suspend fun payment(@Field("apitoken") apitoken: String,

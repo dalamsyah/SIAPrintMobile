@@ -61,6 +61,11 @@
         android:label="Upload"
         tools:layout="@layout/fragment_upload" />
     <fragment
+        android:id="@+id/keranjangFragment"
+        android:name="com.dalamsyah.siaprint.ui.keranjang.KeranjangFragment"
+        android:label="Keranjang"
+        tools:layout="@layout/fragment_keranjang" />
+    <fragment
         android:id="@+id/statusFragment"
         android:name="com.dalamsyah.siaprint.ui.status.StatusFragment"
         android:label="Status"

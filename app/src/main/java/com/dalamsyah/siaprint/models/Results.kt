@@ -13,5 +13,14 @@ data class Results (
     var trsc_print_d: MutableList<TransactionPrintD>,
 
     @SerializedName("payment")
-    var payment: Payment
+    var payment: Payment,
+
+    @SerializedName("basket")
+    var basket: MutableList<Basket>,
+
+    @SerializedName("company")
+    var company: MutableList<Company>,
+
+    @SerializedName("company_selected")
+    var company_selected: MutableList<Company>
 )
