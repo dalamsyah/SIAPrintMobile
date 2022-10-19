@@ -2,6 +2,7 @@ package com.dalamsyah.siaprint.retrofit
 
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import org.json.JSONObject
 
 class MainRepository(private val apiHelper: ApiHelper) {
 
@@ -17,5 +18,10 @@ class MainRepository(private val apiHelper: ApiHelper) {
                        desc: RequestBody
     ) =
         apiHelper.upload(apitoken, userid, inputFile1, inputFile2, inputFile3, inputFile4, inputFile5, desc)
+
+    suspend fun printDetail(apitoken: String, compid: String, userid: String) = apiHelper.printDetail(apitoken, compid, userid)
+    suspend fun printSave(apitoken: String, userid: String, arr: JSONObject, data: JSONObject) = apiHelper.printSave(apitoken, userid, arr, data)
+    suspend fun printSave2(apitoken: String, userid: String, arr: JSONObject, data: JSONObject) = apiHelper.printSave2(apitoken, userid, arr, data)
+    suspend fun ongkir(data: JSONObject) = apiHelper.ongkir(data)
 
 }

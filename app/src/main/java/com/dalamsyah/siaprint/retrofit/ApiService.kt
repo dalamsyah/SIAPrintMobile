@@ -3,6 +3,7 @@ package com.dalamsyah.siaprint.retrofit
 import com.dalamsyah.siaprint.models.ResponseAPI
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import org.json.JSONObject
 import retrofit2.http.*
 
 interface ApiService {
@@ -30,6 +31,12 @@ interface ApiService {
     suspend fun keranjang(@Field("apitoken") apitoken: String,
                        @Field("userid") userid: String): ResponseAPI
 
+    @POST("apiprint")
+    @FormUrlEncoded
+    suspend fun printDetail(@Field("apitoken") apitoken: String,
+                          @Field("compid") compid: String,
+                          @Field("userid") userid: String): ResponseAPI
+
     @POST("apipayment")
     @FormUrlEncoded
     suspend fun payment(@Field("apitoken") apitoken: String,
@@ -39,6 +46,17 @@ interface ApiService {
                         @Field("payment_name") payment_name: String,
                         @Field("phone_no") phone_no: String,
                         @Field("vendor_code") vendor_code: String): ResponseAPI
+
+    @POST("apibasketsave")
+    @FormUrlEncoded
+    suspend fun printSave(@Field("apitoken") apitoken: String,
+                          @Field("userid") userid: String,
+                          @Field("data2") arr: JSONObject,
+                          @Body data: JSONObject  ): ResponseAPI
+
+    @POST("apibasketsave")
+    @Headers( "Content-Type: application/json; charset=utf-8")
+    suspend fun printSave2( @Body data: JSONObject  ): ResponseAPI
 
     @Multipart
     @POST("apiuploadsave")
@@ -65,5 +83,9 @@ interface ApiService {
         @Part inputFile1: MultipartBody.Part,
         @Part("desc") desc: RequestBody
     ): ResponseAPI
+
+    @POST("apiongkir")
+    @Headers( "Content-Type: application/json; charset=utf-8")
+    suspend fun ongkir( @Body data: JSONObject  ): ResponseAPI
 
 }

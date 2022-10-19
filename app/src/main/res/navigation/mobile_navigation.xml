@@ -64,7 +64,25 @@
         android:id="@+id/keranjangFragment"
         android:name="com.dalamsyah.siaprint.ui.keranjang.KeranjangFragment"
         android:label="Keranjang"
-        tools:layout="@layout/fragment_keranjang" />
+        tools:layout="@layout/fragment_keranjang">
+        <action
+            android:id="@+id/action_keranjangFragment_to_printFragmnt"
+            app:destination="@id/printFragmnt" />
+    </fragment>
+    <fragment
+        android:id="@+id/printFragmnt"
+        android:name="com.dalamsyah.siaprint.ui.print.PrintFragment"
+        android:label="Print"
+        tools:layout="@layout/fragment_print">
+        <action
+            android:id="@+id/action_printFragmnt_to_printDetailFragment"
+            app:destination="@id/printDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/printDetailFragment"
+        android:name="com.dalamsyah.siaprint.ui.print.PrintDetailFragment"
+        android:label="Print Detail"
+        tools:layout="@layout/fragment_print_detail" />
     <fragment
         android:id="@+id/statusFragment"
         android:name="com.dalamsyah.siaprint.ui.status.StatusFragment"

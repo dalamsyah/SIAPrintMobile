@@ -44,4 +44,25 @@
     <string name="no_ovo_masih_kosong">No OVO tidak boleh kosong!</string>
     <string name="next">Selanjutnya</string>
     <string name="alamatyangdipilih">Alamat yang dipilih</string>
+    <string name="data_print_belum_dilengkapi">Data print belum dilengkapi</string>
+    <string name="print_tinta">Print Tinta</string>
+    <string name="print_laser">Print Laser</string>
+    <string name="print">1. Print</string>
+    <string name="ukuran_kertas">2. Ukuran Kertas</string>
+    <string name="jenis_kertas">3. Jenis Kertas</string>
+    <string name="pages">pages</string>
+    <string name="all">All</string>
+    <string name="pages1">Pages</string>
+    <string name="halaman">4. Halaman</string>
+    <string name="desc_halaman">** masukkan range halaman atau per halaman cnth : 1-7 atau 1,2,6,7</string>
+    <string name="copy">5. Copy</string>
+    <string name="finishing">6. Finishing</string>
+    <string name="pesan">7. Pesan</string>
+    <string name="pesan_desc">isi pesan untuk dokumen ini</string>
+    <string name="pengiriman">Pengiriman</string>
+    <string name="pickup">Pickup by customer</string>
+    <string name="delivery_jne">Delivery JNE</string>
+    <string name="total">Total</string>
+    <string name="proses">Proses</string>
+    <string name="warning_tipe_print">Tipe print belum dipilih.</string>
 </resources>

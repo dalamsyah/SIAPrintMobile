@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="model"
+            type="com.dalamsyah.siaprint.models.Basket" />
+        <variable
+            name="clickListener"
+            type="com.dalamsyah.siaprint.ui.print.PrintListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:onClick="@{()->clickListener.onClick(model)}"
+            app:cardUseCompatPadding="true"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvFileName"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:paddingLeft="@dimen/padding_layout_atas_samping_bawah"
+                    android:paddingRight="@dimen/padding_layout_atas_samping_bawah"
+                    android:paddingTop="@dimen/padding_layout_atas_samping_bawah"
+                    android:text="@{String.valueOf(model.filename)}" />
+
+                <TextView
+                    android:visibility="@{model.complete ? View.INVISIBLE : View.VISIBLE}"
+                    android:id="@+id/tvWarning"
+                    android:textColor="#D32F2F"
+                    app:layout_constraintTop_toBottomOf="@id/tvFileName"
+                    android:text="@string/data_print_belum_dilengkapi"
+                    android:paddingLeft="@dimen/padding_layout_atas_samping_bawah"
+                    android:paddingRight="@dimen/padding_layout_atas_samping_bawah"
+                    android:paddingBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
+
+

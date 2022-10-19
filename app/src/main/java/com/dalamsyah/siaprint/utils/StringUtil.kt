@@ -7,6 +7,7 @@ import android.util.Log
 import com.dalamsyah.siaprint.BuildConfig
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.orhanobut.logger.Logger
 import java.text.NumberFormat
 import java.util.*
 import kotlin.reflect.KClass
@@ -83,10 +84,16 @@ fun <T : Any> mapToObject(map: Map<String, Any>, clazz: KClass<T>) : T? {
     return null //constructor.callBy(args)
 }
 
-fun Any.convertRupiah(): String {
+fun String.convertRupiah(): String {
     val localId = Locale("in", "ID")
     val formatter = NumberFormat.getCurrencyInstance(localId)
-    return formatter.format(this)
+    var string = "0"
+    try {
+        string = this as String
+    }catch (e: Exception){
+        Logger.d(e)
+    }
+    return formatter.format(string.toDouble()).toString().replace("Rp", "Rp ").replace(",00","")
 }
 
 fun convertRupiah(number: Double): String {

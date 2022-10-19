@@ -1,5 +1,7 @@
 package com.dalamsyah.siaprint.models
 
+import java.io.Serializable
+
 data class Basket (
     var id: String = "",
     var user_id: String = "",
@@ -10,5 +12,7 @@ data class Basket (
     var created_at: String = "",
     var updated_at: String = "",
     var deleted_at: String = "",
-    var selected: Boolean = false
-)
+    var selected: Boolean = false,
+    var isComplete: Boolean = false,
+    var printArray: PrintArray = PrintArray()
+) : Serializable

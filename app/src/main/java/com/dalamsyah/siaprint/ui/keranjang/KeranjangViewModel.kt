@@ -52,4 +52,15 @@ class KeranjangViewModel : ViewModel() {
         }
     }
 
+    fun getListBasketSelected() : MutableList<Basket>{
+
+        var list = mutableListOf<Basket>()
+        for (model in _listBasket.value!!){
+            if (model.selected){
+                list.add(model)
+            }
+        }
+        return list
+    }
+
 }

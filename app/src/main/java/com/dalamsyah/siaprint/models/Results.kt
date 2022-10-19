@@ -22,5 +22,8 @@ data class Results (
     var company: MutableList<Company>,
 
     @SerializedName("company_selected")
-    var company_selected: MutableList<Company>
+    var company_selected: MutableList<Company>,
+
+    @SerializedName("print")
+    var print: Print
 )
